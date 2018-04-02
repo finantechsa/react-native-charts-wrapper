@@ -59,14 +59,20 @@ public class CandleDataExtract extends DataExtract<CandleData, CandleEntry> {
             candleDataSet.setDecreasingColor(config.getInt("decreasingColor"));
         }
         if (BridgeUtils.validate(config, ReadableType.String, "decreasingPaintStyle")) {
-            candleDataSet.setDecreasingPaintStyle(Paint.Style.valueOf(config.getString("decreasingPaintStyle").toUpperCase(Locale.ENGLISH)));
+            candleDataSet.setDecreasingPaintStyle(
+                    Paint.Style.valueOf(config.getString("decreasingPaintStyle").toUpperCase(Locale.ENGLISH)));
         }
         if (BridgeUtils.validate(config, ReadableType.Number, "increasingColor")) {
             candleDataSet.setIncreasingColor(config.getInt("increasingColor"));
         }
         if (BridgeUtils.validate(config, ReadableType.String, "increasingPaintStyle")) {
-            candleDataSet.setIncreasingPaintStyle(Paint.Style.valueOf(config.getString("increasingPaintStyle").toUpperCase(Locale.ENGLISH)));
+            candleDataSet.setIncreasingPaintStyle(
+                    Paint.Style.valueOf(config.getString("increasingPaintStyle").toUpperCase(Locale.ENGLISH)));
         }
+        if (BridgeUtils.validate(config, ReadableType.Boolean, "showCandleBar")) {
+            candleDataSet.setShowCandleBar(config.getBoolean("showCandleBar"));
+        }
+
     }
 
     @Override
@@ -82,12 +88,12 @@ public class CandleDataExtract extends DataExtract<CandleData, CandleEntry> {
             x = (float) map.getDouble("x");
         }
 
-        if (
-                !BridgeUtils.validate(map, ReadableType.Number, "shadowH") ||
-                        !BridgeUtils.validate(map, ReadableType.Number, "shadowL") ||
-                        !BridgeUtils.validate(map, ReadableType.Number, "open") ||
-                        !BridgeUtils.validate(map, ReadableType.Number, "close")) {
-            throw new IllegalArgumentException("CandleStick data must contain: shadowH, shadowL, open and close values");
+        if (!BridgeUtils.validate(map, ReadableType.Number, "shadowH")
+                || !BridgeUtils.validate(map, ReadableType.Number, "shadowL")
+                || !BridgeUtils.validate(map, ReadableType.Number, "open")
+                || !BridgeUtils.validate(map, ReadableType.Number, "close")) {
+            throw new IllegalArgumentException(
+                    "CandleStick data must contain: shadowH, shadowL, open and close values");
         }
 
         float shadowH = (float) map.getDouble("shadowH");

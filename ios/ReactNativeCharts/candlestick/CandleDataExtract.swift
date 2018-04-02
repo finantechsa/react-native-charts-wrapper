@@ -71,6 +71,10 @@ class CandleDataExtract : DataExtract {
                 candleDataSet.increasingFilled = false;
             }
         }
+
+        if config["showCandleBar"].bool != nil {
+            candleDataSet.showCandleBar = config["showCandleBar"].boolValue;
+        }
     }
     
     override func createEntry(_ values: [JSON], index: Int) -> CandleChartDataEntry {
