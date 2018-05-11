@@ -406,7 +406,7 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
                 try {
                     // long support && float check
                     if (multiplier > Integer.MAX_VALUE && value % 1 == 0) {
-                        multiplierLong = (long) value;
+                        multiplierLong = (long) multiplier;
                         // use the long value
                     }
                 } catch (Exception e) {
