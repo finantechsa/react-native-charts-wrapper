@@ -402,7 +402,7 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
 
                 long multiplierLong = 1;
 
-                double multiplier = readableMap.getDouble("valueFormatterMultiplier");
+                double multiplier = propMap.getDouble("valueFormatterMultiplier");
                 try {
                     // long support && float check
                     if (multiplier > Integer.MAX_VALUE && multiplier % 1 == 0) {
