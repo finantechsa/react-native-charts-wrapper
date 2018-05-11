@@ -19,15 +19,9 @@ import java.util.Date;
 public class DateFormatter implements IAxisValueFormatter, IValueFormatter {
 
     private DateFormat mFormat;
-    private long mMultiplier = 1;
 
     public DateFormatter(String pattern) {
         mFormat = new SimpleDateFormat(pattern);
-    }
-
-    public DateFormatter(String pattern, long multiplier) {
-        this(pattern);
-        mMultiplier = multiplier;
     }
 
     @Override
@@ -41,6 +35,6 @@ public class DateFormatter implements IAxisValueFormatter, IValueFormatter {
     }
 
     private String format(long millis) {
-        return mFormat.format(new Date(millis * mMultiplier));
+        return mFormat.format(new Date(millis));
     }
 }

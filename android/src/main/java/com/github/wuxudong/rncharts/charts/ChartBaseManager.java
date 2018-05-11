@@ -399,21 +399,7 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
                 axis.setValueFormatter(new PercentFormatter());
             } else if ("date".equals(valueFormatter)) {
                 String valueFormatterPattern = propMap.getString("valueFormatterPattern");
-
-                long multiplierLong = 1;
-
-                double multiplier = propMap.getDouble("valueFormatterMultiplier");
-                try {
-                    // long support && float check
-                    if (multiplier > Integer.MAX_VALUE && multiplier % 1 == 0) {
-                        multiplierLong = (long) multiplier;
-                        // use the long value
-                    }
-                } catch (Exception e) {
-                    // use raw value
-                }
-
-                axis.setValueFormatter(new DateFormatter(valueFormatterPattern, multiplierLong));
+                axis.setValueFormatter(new DateFormatter(valueFormatterPattern));
             } else {
                 axis.setValueFormatter(new CustomFormatter(valueFormatter));
             }
