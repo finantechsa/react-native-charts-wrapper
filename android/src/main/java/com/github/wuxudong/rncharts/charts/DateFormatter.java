@@ -1,5 +1,7 @@
 package com.github.wuxudong.rncharts.charts;
 
+import android.util.Log;
+
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
@@ -24,11 +26,17 @@ public class DateFormatter implements IAxisValueFormatter, IValueFormatter {
 
     @Override
     public String getFormattedValue(float value, AxisBase yAxis) {
+
+        Log.d("[DateFormatter]", "getFormattedValue called with value: " + value);
+
         return format((long) value);
     }
 
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+
+        Log.d("[DateFormatter]", "getFormattedValue called with value: " + value + " dataSetIndex: " + dataSetIndex + " entry.getX(): " + entry.getX());
+
         return format((long) value);
     }
 
