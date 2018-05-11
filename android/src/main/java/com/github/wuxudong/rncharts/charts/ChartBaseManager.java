@@ -405,7 +405,7 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
                 double multiplier = readableMap.getDouble("valueFormatterMultiplier");
                 try {
                     // long support && float check
-                    if (multiplier > Integer.MAX_VALUE && value % 1 == 0) {
+                    if (multiplier > Integer.MAX_VALUE && multiplier % 1 == 0) {
                         multiplierLong = (long) multiplier;
                         // use the long value
                     }
