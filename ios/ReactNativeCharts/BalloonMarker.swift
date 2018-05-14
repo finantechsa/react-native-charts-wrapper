@@ -24,7 +24,7 @@ open class BalloonMarker: MarkerView {
     open var font: UIFont?
     open var textColor: UIColor?
     open var minimumSize = CGSize()
-
+    open var digits: Int = 0
     
     fileprivate var insets = UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)
     fileprivate var topInsets = UIEdgeInsetsMake(20.0, 8.0, 8.0, 8.0)
@@ -35,15 +35,22 @@ open class BalloonMarker: MarkerView {
     fileprivate var _paragraphStyle: NSMutableParagraphStyle?
     fileprivate var _drawAttributes = [String: AnyObject]()
 
+    fileprivate var _formatter: NumberFormatter?
 
-    public init(color: UIColor, font: UIFont, textColor: UIColor) {
+    public init(color: UIColor, font: UIFont, textColor: UIColor, digits: Int) {
         super.init(frame: CGRect.zero);
         self.color = color
         self.font = font
         self.textColor = textColor
+        self.digits = digits
 
         _paragraphStyle = NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle
         _paragraphStyle?.alignment = .center
+
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = digits
+        formatter.minimumFractionDigits = digits
+        _formatter = formatter
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -203,26 +210,31 @@ open class BalloonMarker: MarkerView {
 
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
 
-        var label : String;
+        var label : Double;
 
         if let candleEntry = entry as? CandleChartDataEntry {
-
-            label = candleEntry.close.description
+            label = candleEntry.close
         } else {
-            label = entry.y.description
+            label = entry.y
         }
 
         if let object = entry.data as? JSON {
             if object["marker"].exists() {
-                label = object["marker"].stringValue;
+                label = object["marker"].doubleValue;
               
                 if highlight.stackIndex != -1 && object["marker"].array != nil {
-                    label = object["marker"].arrayValue[highlight.stackIndex].stringValue
+                    label = object["marker"].arrayValue[highlight.stackIndex].doubleValue
                 }
             }
         }
 
-        labelns = label as NSString
+        let labelAsString = _formatter?.string(from: NSNumber(value: label))
+
+        if labelAsString != nil {
+            labelns = NSString(string: labelAsString)
+        } else {
+            labelns = nil
+        }
 
         _drawAttributes.removeAll()
         _drawAttributes[NSFontAttributeName] = self.font

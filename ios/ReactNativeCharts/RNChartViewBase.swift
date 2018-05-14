@@ -388,13 +388,19 @@ open class RNChartViewBase: UIView, ChartViewDelegate {
             markerFont = markerFont.withSize(CGFloat(json["textSize"].floatValue))
         }
         
-        
+        var markerDigits: Int = 0;
+
+        if json["digits"].int != nil {
+            markerDigits = json["digits"].intValue
+        }
+
         // TODO fontFamily, fontStyle
         
         let balloonMarker = BalloonMarker(
             color: RCTConvert.uiColor(json["markerColor"].intValue),
             font: markerFont,
-            textColor: RCTConvert.uiColor(json["textColor"].intValue))
+            textColor: RCTConvert.uiColor(json["textColor"].intValue),
+            digits: markerDigits)
         chart.marker = balloonMarker
         
         balloonMarker.chartView = chart
