@@ -231,7 +231,7 @@ open class BalloonMarker: MarkerView {
         let labelAsString = _formatter?.string(from: NSNumber(value: label))
 
         if labelAsString != nil {
-            labelns = NSString(string: labelAsString)
+            labelns = NSString(string: labelAsString!)
         } else {
             labelns = nil
         }
