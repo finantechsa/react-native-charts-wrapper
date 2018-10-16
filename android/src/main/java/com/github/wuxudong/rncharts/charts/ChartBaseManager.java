@@ -49,7 +49,8 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
     abstract DataExtract getDataExtract();
 
     /**
-     * More details about legend customization: https://github.com/PhilJay/MPAndroidChart/wiki/Legend
+     * More details about legend customization:
+     * https://github.com/PhilJay/MPAndroidChart/wiki/Legend
      */
     @ReactProp(name = "legend")
     public void setLegend(T chart, ReadableMap propMap) {
@@ -98,8 +99,8 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
         // Custom labels & colors
         if (BridgeUtils.validate(propMap, ReadableType.Map, "custom")) {
             ReadableMap customMap = propMap.getMap("custom");
-            if (BridgeUtils.validate(customMap, ReadableType.Array, "colors") &&
-                    BridgeUtils.validate(customMap, ReadableType.Array, "labels")) {
+            if (BridgeUtils.validate(customMap, ReadableType.Array, "colors")
+                    && BridgeUtils.validate(customMap, ReadableType.Array, "labels")) {
 
                 ReadableArray colorsArray = customMap.getArray("colors");
                 ReadableArray labelsArray = customMap.getArray("labels");
@@ -150,8 +151,8 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
         if (BridgeUtils.validate(propMap, ReadableType.Number, "textSize")) {
             description.setTextSize((float) propMap.getDouble("textSize"));
         }
-        if (BridgeUtils.validate(propMap, ReadableType.Number, "positionX") &&
-                BridgeUtils.validate(propMap, ReadableType.Number, "positionY")) {
+        if (BridgeUtils.validate(propMap, ReadableType.Number, "positionX")
+                && BridgeUtils.validate(propMap, ReadableType.Number, "positionY")) {
             description.setPosition((float) propMap.getDouble("positionX"), (float) propMap.getDouble("positionY"));
         }
 
@@ -240,12 +241,9 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
         RNRectangleMarkerView marker = new RNRectangleMarkerView(chart.getContext());
         marker.setChartView(chart);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                BridgeUtils.validate(propMap, ReadableType.Number, "markerColor")) {
-            marker.getTvContent()
-                    .setBackgroundTintList(
-                            ColorStateList.valueOf(propMap.getInt("markerColor"))
-                    );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && BridgeUtils.validate(propMap, ReadableType.Number, "markerColor")) {
+            marker.getTvContent().setBackgroundTintList(ColorStateList.valueOf(propMap.getInt("markerColor")));
         }
 
         if (BridgeUtils.validate(propMap, ReadableType.Number, "digits")) {
@@ -263,7 +261,8 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
     }
 
     /**
-     * General axis config details: https://github.com/PhilJay/MPAndroidChart/wiki/The-Axis
+     * General axis config details:
+     * https://github.com/PhilJay/MPAndroidChart/wiki/The-Axis
      */
     protected void setCommonAxisConfig(Chart chart, AxisBase axis, ReadableMap propMap) {
         // what is drawn
@@ -340,7 +339,7 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
                     if (BridgeUtils.validate(limitLineMap, ReadableType.Number, "lineWidth")) {
                         limitLine.setLineWidth((float) limitLineMap.getDouble("lineWidth"));
                     }
-                    
+
                     if (BridgeUtils.validate(limitLineMap, ReadableType.Number, "valueTextColor")) {
                         limitLine.setTextColor(limitLineMap.getInt("valueTextColor"));
                     }
@@ -348,15 +347,16 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
                         limitLine.setTextSize(limitLineMap.getInt("valueFont"));
                     }
                     if (BridgeUtils.validate(limitLineMap, ReadableType.String, "labelPosition")) {
-                        limitLine.setLabelPosition(LimitLine.LimitLabelPosition.valueOf(limitLineMap.getString("labelPosition")));
+                        limitLine.setLabelPosition(
+                                LimitLine.LimitLabelPosition.valueOf(limitLineMap.getString("labelPosition")));
                     }
                     if (BridgeUtils.validate(limitLineMap, ReadableType.Number, "lineDashPhase")
                             && BridgeUtils.validate(limitLineMap, ReadableType.Array, "lineDashLengths")) {
-                        if (limitLineMap.getArray("lineDashLengths").size()>1) {
+                        if (limitLineMap.getArray("lineDashLengths").size() > 1) {
                             float lineDashPhase = (float) limitLineMap.getDouble("lineDashPhase");
-                            float lineLength =  limitLineMap.getArray("lineDashLengths").getInt(0);
+                            float lineLength = limitLineMap.getArray("lineDashLengths").getInt(0);
                             float spaceLength = limitLineMap.getArray("lineDashLengths").getInt(1);
-                            limitLine.enableDashedLine(lineLength,spaceLength, lineDashPhase);
+                            limitLine.enableDashedLine(lineLength, spaceLength, lineDashPhase);
                         }
                     }
 
@@ -404,16 +404,26 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
                 axis.setValueFormatter(new CustomFormatter(valueFormatter));
             }
         } else if (BridgeUtils.validate(propMap, ReadableType.Array, "valueFormatter")) {
-            axis.setValueFormatter(new IndexAxisValueFormatter(BridgeUtils.convertToStringArray(propMap.getArray("valueFormatter"))));
+            axis.setValueFormatter(
+                    new IndexAxisValueFormatter(BridgeUtils.convertToStringArray(propMap.getArray("valueFormatter"))));
         }
 
         if (BridgeUtils.validate(propMap, ReadableType.Boolean, "centerAxisLabels")) {
             axis.setCenterAxisLabels(propMap.getBoolean("centerAxisLabels"));
         }
+
+        if (BridgeUtils.validate(propMap, ReadableType.Number, "xOffset")) {
+            axis.setXOffset(propMap.getDouble("xOffset"));
+        }
+
+        if (BridgeUtils.validate(propMap, ReadableType.Number, "yOffset")) {
+            axis.setYOffset(propMap.getDouble("yOffset"));
+        }
     }
 
     /**
-     * Dataset config details: https://github.com/PhilJay/MPAndroidChart/wiki/DataSet-classes-in-detail
+     * Dataset config details:
+     * https://github.com/PhilJay/MPAndroidChart/wiki/DataSet-classes-in-detail
      */
     @ReactProp(name = "data")
     public void setData(Chart chart, ReadableMap propMap) {
@@ -433,13 +443,18 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
 
             if (BridgeUtils.validate(highlightMap, ReadableType.Number, "x")) {
 
-                int dataSetIndex = BridgeUtils.validate(highlightMap, ReadableType.Number, "dataSetIndex") ? highlightMap.getInt("dataSetIndex") : 0;
+                int dataSetIndex = BridgeUtils.validate(highlightMap, ReadableType.Number, "dataSetIndex")
+                        ? highlightMap.getInt("dataSetIndex")
+                        : 0;
 
-                float y = BridgeUtils.validate(highlightMap, ReadableType.Number, "y") ? (float) highlightMap.getDouble("y") : 0;
+                float y = BridgeUtils.validate(highlightMap, ReadableType.Number, "y")
+                        ? (float) highlightMap.getDouble("y")
+                        : 0;
 
                 Highlight e = null;
                 if (BridgeUtils.validate(highlightMap, ReadableType.Number, "stackIndex")) {
-                    e = new Highlight((float) highlightMap.getDouble("x"), dataSetIndex, highlightMap.getInt("stackIndex"));
+                    e = new Highlight((float) highlightMap.getDouble("x"), dataSetIndex,
+                            highlightMap.getInt("stackIndex"));
                 } else {
                     e = new Highlight((float) highlightMap.getDouble("x"), y, dataSetIndex);
                 }
@@ -454,7 +469,6 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
 
         chart.highlightValues(highlights.toArray(new Highlight[highlights.size()]));
     }
-
 
     @Override
     protected void onAfterUpdateTransaction(T chart) {
