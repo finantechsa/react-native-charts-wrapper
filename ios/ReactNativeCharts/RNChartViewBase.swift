@@ -374,11 +374,11 @@ open class RNChartViewBase: UIView, ChartViewDelegate {
         }
 
         if config["xOffset"].float != nil {
-            axis.setXOffset(CGFloat(config["xOffset"].floatValue));
+            axis.xOffset = CGFloat(config["xOffset"].floatValue);
         }
 
         if config["yOffset"].float != nil {
-            axis.setYOffset(CGFloat(config["yOffset"].floatValue));
+            axis.yOffset = CGFloat(config["yOffset"].floatValue);
         }
 
     }
