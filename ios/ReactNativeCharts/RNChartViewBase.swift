@@ -372,6 +372,15 @@ open class RNChartViewBase: UIView, ChartViewDelegate {
         if config["centerAxisLabels"].bool != nil {
             axis.centerAxisLabelsEnabled = config["centerAxisLabels"].boolValue
         }
+
+        if config["xOffset"].float != nil {
+            axis.setXOffset(CGFloat(config["xOffset"].floatValue));
+        }
+
+        if config["yOffset"].float != nil {
+            axis.setYOffset(CGFloat(config["yOffset"].floatValue));
+        }
+
     }
     
     func setMarker(_ config: NSDictionary) {

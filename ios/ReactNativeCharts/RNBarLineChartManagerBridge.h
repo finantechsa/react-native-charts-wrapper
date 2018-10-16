@@ -12,6 +12,10 @@ RCT_EXPORT_VIEW_PROPERTY(gridBackgroundColor, NSInteger) \
 RCT_EXPORT_VIEW_PROPERTY(drawBorders, BOOL) \
 RCT_EXPORT_VIEW_PROPERTY(borderColor, NSInteger) \
 RCT_EXPORT_VIEW_PROPERTY(borderWidth, CGFloat) \
+RCT_EXPORT_VIEW_PROPERTY(extraBottomOffset, CGFloat) \
+RCT_EXPORT_VIEW_PROPERTY(extraTopOffset, CGFloat) \
+RCT_EXPORT_VIEW_PROPERTY(extraLeftOffset, CGFloat) \
+RCT_EXPORT_VIEW_PROPERTY(extraRightOffset, CGFloat) \
 RCT_EXPORT_VIEW_PROPERTY(maxVisibleValueCount, NSInteger) \
 RCT_EXPORT_VIEW_PROPERTY(visibleRange, NSDictionary) \
 RCT_EXPORT_VIEW_PROPERTY(autoScaleMinMaxEnabled, BOOL) \
