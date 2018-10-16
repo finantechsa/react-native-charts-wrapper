@@ -36,6 +36,26 @@ public abstract class BarLineChartBaseManager<T extends BarLineChartBase, U exte
         }
     }
 
+    @ReactProp(name = "extraBottomOffset")
+    public void setExtraBottomOffset(BarLineChartBase chart, float offset) {
+        chart.setExtraBottomOffset(offset);
+    }
+
+    @ReactProp(name = "extraTopOffset")
+    public void setExtraTopOffset(BarLineChartBase chart, float offset) {
+        chart.setExtraTopOffset(offset);
+    }
+
+    @ReactProp(name = "extraRightOffset")
+    public void setExtraRightOffset(BarLineChartBase chart, float offset) {
+        chart.setExtraRightOffset(offset);
+    }
+
+    @ReactProp(name = "extraLeftOffset")
+    public void setExtraLeftOffset(BarLineChartBase chart, float offset) {
+        chart.setExtraLeftOffset(offset);
+    }
+
     @ReactProp(name = "drawGridBackground")
     public void setDrawGridBackground(BarLineChartBase chart, boolean enabled) {
         chart.setDrawGridBackground(enabled);
