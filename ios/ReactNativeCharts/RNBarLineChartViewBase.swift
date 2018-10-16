@@ -32,19 +32,19 @@ class RNBarLineChartViewBase: RNYAxisChartViewBase {
     }
 
     func setExtraBottomOffset(_ offset: CGFloat) {
-        barLineChart.setExtraBottomOffset(offset);
+        barLineChart.extraBottomOffset = offset;
     }
 
     func setExtraTopOffset(_ offset: CGFloat) {
-        barLineChart.setExtraTopOffset(offset);
+        barLineChart.extraTopOffset = offset;
     }
 
     func setExtraRightOffset(_ offset: CGFloat) {
-        barLineChart.setExtraRightOffset(offset);
+        barLineChart.extraRightOffset = offset;
     }
 
     func setExtraLeftOffset(_ offset: CGFloat) {
-        barLineChart.setExtraLeftOffset(offset);
+        barLineChart.extraLeftOffset = offset;
     }
 
     func setDrawGridBackground(_  enabled: Bool) {
