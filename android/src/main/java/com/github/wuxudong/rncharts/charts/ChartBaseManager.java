@@ -413,11 +413,11 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
         }
 
         if (BridgeUtils.validate(propMap, ReadableType.Number, "xOffset")) {
-            axis.setXOffset(propMap.getDouble("xOffset"));
+            axis.setXOffset((float) propMap.getDouble("xOffset"));
         }
 
         if (BridgeUtils.validate(propMap, ReadableType.Number, "yOffset")) {
-            axis.setYOffset(propMap.getDouble("yOffset"));
+            axis.setYOffset((float) propMap.getDouble("yOffset"));
         }
     }
 
