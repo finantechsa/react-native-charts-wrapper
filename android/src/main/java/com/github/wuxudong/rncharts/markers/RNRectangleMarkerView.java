@@ -72,17 +72,7 @@ public class RNRectangleMarkerView extends MarkerView {
         if (TextUtils.isEmpty(text)) {
             tvContent.setVisibility(INVISIBLE);
         } else {
-
-            Chart chart = getChartView();
-
-            XAxis xAxis = chart.getXAxis();
-
-            IAxisValueFormatter xValueFormatter = xAxis.getValueFormatter();
-
-            String formattedEntryXValue = xValueFormatter.getFormattedValue(e.getX());
-
-            tvContent.setText(text + "\n" + formattedEntryXValue);
-
+            tvContent.setText(text);
             tvContent.setVisibility(VISIBLE);
         }
         
