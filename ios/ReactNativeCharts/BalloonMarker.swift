@@ -218,9 +218,11 @@ open class BalloonMarker: MarkerView {
             label = entry.y
         }
 
+        var markerValue : String?;
+
         if let object = entry.data as? JSON {
             if object["marker"].exists() {
-                label = object["marker"].doubleValue;
+                markerValue = object["marker"].string;
               
                 if highlight.stackIndex != -1 && object["marker"].array != nil {
                     label = object["marker"].arrayValue[highlight.stackIndex].doubleValue
@@ -228,7 +230,17 @@ open class BalloonMarker: MarkerView {
             }
         }
 
-        let labelAsString = _formatter?.string(from: NSNumber(value: label))
+        var labelAsString : String?
+        
+        if(markerValue != nil) {
+
+            labelAsString = markerValue;
+
+        } else {
+
+            labelAsString = _formatter?.string(from: NSNumber(value: label))
+            
+        }
 
         if labelAsString != nil {
             labelns = NSString(string: labelAsString!)
