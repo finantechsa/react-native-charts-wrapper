@@ -199,6 +199,10 @@ open class RNChartViewBase: UIView, ChartViewDelegate {
         if json["avoidFirstLastClipping"].bool != nil {
             xAxis.avoidFirstLastClippingEnabled = json["avoidFirstLastClipping"].boolValue
         }
+
+        if json["forceFirstLastInsideAxis"].bool != nil {
+            xAxis.forceFirstLastInsideAxis = json["forceFirstLastInsideAxis"].boolValue
+        }
         
         if json["position"].string != nil {
             xAxis.labelPosition = BridgeUtils.parseXAxisLabelPosition(json["position"].stringValue)
