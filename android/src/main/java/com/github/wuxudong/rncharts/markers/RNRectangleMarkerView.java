@@ -15,6 +15,8 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.wuxudong.rncharts.R;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.XAxis;
 
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,17 @@ public class RNRectangleMarkerView extends MarkerView {
         if (TextUtils.isEmpty(text)) {
             tvContent.setVisibility(INVISIBLE);
         } else {
-            tvContent.setText(text);
+
+            Chart chart = getChartView();
+
+            XAxis xAxis = chart.getXAxis();
+
+            IAxisValueFormatter xValueFormatter = xAxis.getValueFormatter();
+
+            String formattedEntryXValue = xValueFormatter.getFormattedValue(e.getX());
+
+            tvContent.setText(text + "\n" + formattedEntryXValue);
+
             tvContent.setVisibility(VISIBLE);
         }
         
