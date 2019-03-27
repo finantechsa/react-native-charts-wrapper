@@ -24,33 +24,26 @@ open class BalloonMarker: MarkerView {
     open var font: UIFont?
     open var textColor: UIColor?
     open var minimumSize = CGSize()
-    open var digits: Int = 0
+
     
-    fileprivate var insets = UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)
-    fileprivate var topInsets = UIEdgeInsetsMake(20.0, 8.0, 8.0, 8.0)
+    fileprivate var insets = UIEdgeInsets(top: 8.0,left: 8.0,bottom: 20.0,right: 8.0)
+    fileprivate var topInsets = UIEdgeInsets(top: 20.0,left: 8.0,bottom: 8.0,right: 8.0)
     
     fileprivate var labelns: NSString?
     fileprivate var _labelSize: CGSize = CGSize()
     fileprivate var _size: CGSize = CGSize()
     fileprivate var _paragraphStyle: NSMutableParagraphStyle?
-    fileprivate var _drawAttributes = [String: AnyObject]()
+    fileprivate var _drawAttributes = [NSAttributedString.Key: Any]()
 
-    fileprivate var _formatter: NumberFormatter?
 
-    public init(color: UIColor, font: UIFont, textColor: UIColor, digits: Int) {
+    public init(color: UIColor, font: UIFont, textColor: UIColor) {
         super.init(frame: CGRect.zero);
         self.color = color
         self.font = font
         self.textColor = textColor
-        self.digits = digits
 
         _paragraphStyle = NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle
         _paragraphStyle?.alignment = .center
-
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = digits
-        formatter.minimumFractionDigits = digits
-        _formatter = formatter
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -210,50 +203,33 @@ open class BalloonMarker: MarkerView {
 
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
 
-        var label : Double;
+        var label : String;
 
         if let candleEntry = entry as? CandleChartDataEntry {
-            label = candleEntry.close
-        } else {
-            label = entry.y
-        }
 
-        var markerValue : String?;
+            label = candleEntry.close.description
+        } else {
+            label = entry.y.description
+        }
 
         if let object = entry.data as? JSON {
             if object["marker"].exists() {
-                markerValue = object["marker"].string;
+                label = object["marker"].stringValue;
               
                 if highlight.stackIndex != -1 && object["marker"].array != nil {
-                    label = object["marker"].arrayValue[highlight.stackIndex].doubleValue
+                    label = object["marker"].arrayValue[highlight.stackIndex].stringValue
                 }
             }
         }
 
-        var labelAsString : String?
-        
-        if(markerValue != nil) {
-
-            labelAsString = markerValue;
-
-        } else {
-
-            labelAsString = _formatter?.string(from: NSNumber(value: label))
-            
-        }
-
-        if labelAsString != nil {
-            labelns = NSString(string: labelAsString!)
-        } else {
-            labelns = nil
-        }
+        labelns = label as NSString
 
         _drawAttributes.removeAll()
-        _drawAttributes[NSFontAttributeName] = self.font
-        _drawAttributes[NSParagraphStyleAttributeName] = _paragraphStyle
-        _drawAttributes[NSForegroundColorAttributeName] = self.textColor
+        _drawAttributes[NSAttributedString.Key.font] = self.font
+        _drawAttributes[NSAttributedString.Key.paragraphStyle] = _paragraphStyle
+        _drawAttributes[NSAttributedString.Key.foregroundColor] = self.textColor
 
-        _labelSize = labelns?.size(attributes: _drawAttributes) ?? CGSize.zero
+        _labelSize = labelns?.size(withAttributes: _drawAttributes) ?? CGSize.zero
         _size.width = _labelSize.width + self.insets.left + self.insets.right
         _size.height = _labelSize.height + self.insets.top + self.insets.bottom
         _size.width = max(minimumSize.width, _size.width)
