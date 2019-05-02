@@ -241,6 +241,10 @@ open class RNChartViewBase: UIView, ChartViewDelegate {
         if json["yOffset"].number != nil {
             xAxis.yOffset = CGFloat(truncating: json["yOffset"].numberValue)
         }
+
+        if json["forceFirstLastInsideAxis"].bool != nil {
+            xAxis.forceFirstLastInsideAxis = json["forceFirstLastInsideAxis"].boolValue
+        }
     }
     
     func setCommonAxisConfig(_ axis: AxisBase, config: JSON) {
