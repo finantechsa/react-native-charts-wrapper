@@ -414,6 +414,14 @@ open class RNChartViewBase: UIView, ChartViewDelegate {
         if config["centerAxisLabels"].bool != nil {
             axis.centerAxisLabelsEnabled = config["centerAxisLabels"].boolValue
         }
+
+        if config["xOffset"].float != nil {
+            axis.xOffset = CGFloat(config["xOffset"].floatValue);
+        }
+
+        if config["yOffset"].float != nil {
+            axis.yOffset = CGFloat(config["yOffset"].floatValue);
+        }
     }
     
     func setMarker(_ config: NSDictionary) {
