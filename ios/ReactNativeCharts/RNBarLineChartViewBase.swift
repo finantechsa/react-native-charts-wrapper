@@ -33,16 +33,29 @@ class RNBarLineChartViewBase: RNYAxisChartViewBase {
         }
     }
 
+    func setExtraBottomOffset(_ offset: CGFloat) {
+        barLineChart.extraBottomOffset = offset;
+    }
+
+    func setExtraTopOffset(_ offset: CGFloat) {
+        barLineChart.extraTopOffset = offset;
+    }
+
+    func setExtraRightOffset(_ offset: CGFloat) {
+        barLineChart.extraRightOffset = offset;
+    }
+
+    func setExtraLeftOffset(_ offset: CGFloat) {
+        barLineChart.extraLeftOffset = offset;
+    }
 
     func setDrawGridBackground(_  enabled: Bool) {
         barLineChart.drawGridBackgroundEnabled = enabled;
     }
 
-
     func setGridBackgroundColor(_ color: Int) {
         barLineChart.gridBackgroundColor = RCTConvert.uiColor(color);
     }
-
 
     func setDrawBorders(_ enabled: Bool) {
         barLineChart.drawBordersEnabled = enabled;
