@@ -13,7 +13,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.facebook.react:react-native:0.20.+'
-    compile 'com.github.boliveira:MPAndroidChart:TestBranch-SNAPSHOT'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.facebook.react:react-native:0.20.+'
+    implementation 'com.github.boliveira:MPAndroidChart:TestBranch-SNAPSHOT'
 }
